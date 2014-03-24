@@ -42,7 +42,7 @@ class BlockStore extends Module
 
 		$this->displayName = $this->l('Store locator block');
 		$this->description = $this->l('Displays an image link to PrestaShop\'s store locator feature.');
-		$this->ps_versions_compliancy = array('min' => '1.5.6.1', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
