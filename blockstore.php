@@ -105,6 +105,12 @@ class BlockStore extends Module
 	{
 		if (Tools::isSubmit('submitStoreConf'))
 		{
+			if (!($languages = Language::getLanguages(true)))
+				return false;
+
+			foreach ($languages as $lang)
+				Configuration::updateValue('BLOCKSTORE_TEXT_'.$lang['id_lang'], Tools::getValue('BLOCKSTORE_TEXT_'.$lang['id_lang']));
+
 			if (isset($_FILES['BLOCKSTORE_IMG']) && isset($_FILES['BLOCKSTORE_IMG']['tmp_name']) && !empty($_FILES['BLOCKSTORE_IMG']['tmp_name']))
 			{
 				if ($error = ImageManager::validateUpload($_FILES['BLOCKSTORE_IMG'], 4000000))
@@ -150,6 +156,12 @@ class BlockStore extends Module
 						'desc' => $this->l('( The selected image will be displayed as 174 pixels per 115 pixels).'),
 						'thumb' => '../modules/'.$this->name.'/'.Configuration::get('BLOCKSTORE_IMG'),
 					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Block text'),
+						'name' => 'BLOCKSTORE_TEXT',
+						'lang' => true,
+					),
 				),
 				'submit' => array(
 					'title' => $this->l('Save'),
@@ -178,8 +190,16 @@ class BlockStore extends Module
 	
 	public function getConfigFieldsValues()
 	{
-		return array(
+		if (!($languages = Language::getLanguages(true)))
+			return false;
+
+		$data = array(
 			'BLOCKSTORE_IMG' => Tools::getValue('BLOCKSTORE_IMG', Configuration::get('BLOCKSTORE_IMG')),
 		);
+
+		foreach ($languages as $lang)
+			$data['BLOCKSTORE_TEXT'][$lang['id_lang']] = Configuration::get('BLOCKSTORE_TEXT_'.$lang['id_lang']);
+
+		return $data;
 	}
 }
