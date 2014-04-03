@@ -83,7 +83,11 @@ class BlockStore extends Module
 	{
 		if (!$this->isCached('blockstore.tpl', $this->getCacheId()))
 		{
-			$this->smarty->assign('store_img', Configuration::get('BLOCKSTORE_IMG'));
+			$id_lang = $this->context->cart->id_lang;
+			$this->smarty->assign(array(
+					'store_img' => Configuration::get('BLOCKSTORE_IMG'),
+					'store_text' => Configuration::get('BLOCKSTORE_TEXT_'.$id_lang),
+				));
 			$sql = 'SELECT COUNT(*)
 					FROM '._DB_PREFIX_.'store s'
 					.Shop::addSqlAssociation('store', 's');
