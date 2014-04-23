@@ -56,7 +56,7 @@ class BlockStore extends Module
 			&& (!$theme->default_left_column || !$this->registerHook('leftColumn')))
 		{
 			// If there are no colums implemented by the template, throw an error and uninstall the module
-			$this->_errors[] = $this->l('This module need to be hooked in a column and your theme does not implement one');
+			$this->_errors[] = $this->l('This module need to be hooked in a column and your theme does not implement one.');
 			parent::uninstall();
 			return false;
 		}
@@ -157,7 +157,7 @@ class BlockStore extends Module
 						'type' => 'file',
 						'label' => $this->l('Block image'),
 						'name' => 'BLOCKSTORE_IMG',
-						'desc' => $this->l('( The selected image will be displayed as 174 pixels per 115 pixels).'),
+						'desc' => $this->l('The selected image will be displayed as 174 pixels per 115 pixels.'),
 						'thumb' => '../modules/'.$this->name.'/'.Configuration::get('BLOCKSTORE_IMG'),
 					),
 					array(
