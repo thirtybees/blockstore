@@ -157,7 +157,6 @@ class BlockStore extends Module
 						'type' => 'file',
 						'label' => $this->l('Block image'),
 						'name' => 'BLOCKSTORE_IMG',
-						'desc' => $this->l('The selected image will be displayed as 174 pixels per 115 pixels.'),
 						'thumb' => '../modules/'.$this->name.'/'.Configuration::get('BLOCKSTORE_IMG'),
 					),
 					array(
