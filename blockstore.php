@@ -33,7 +33,7 @@ class BlockStore extends Module
 	{
 		$this->name = 'blockstore';
 		$this->tab = 'front_office_features';
-		$this->version = 1.1;
+		$this->version = '1.1';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -86,7 +86,7 @@ class BlockStore extends Module
 			$id_lang = $this->context->cart->id_lang;
 			$this->smarty->assign(array(
 					'store_img' => Configuration::get('BLOCKSTORE_IMG'),
-					'store_text' => Configuration::get('BLOCKSTORE_TEXT_'.$id_lang),
+					'store_text' => Configuration::get('BLOCKSTORE_TEXT', $id_lang),
 				));
 			$sql = 'SELECT COUNT(*)
 					FROM '._DB_PREFIX_.'store s'
@@ -112,8 +112,11 @@ class BlockStore extends Module
 			if (!($languages = Language::getLanguages(true)))
 				return false;
 
+			$text = array();
 			foreach ($languages as $lang)
-				Configuration::updateValue('BLOCKSTORE_TEXT_'.$lang['id_lang'], Tools::getValue('BLOCKSTORE_TEXT_'.$lang['id_lang']));
+				$text[$lang['id_lang']] = Tools::getValue('BLOCKSTORE_TEXT_'.$lang['id_lang']);
+
+			Configuration::updateValue('BLOCKSTORE_TEXT', $text);
 
 			if (isset($_FILES['BLOCKSTORE_IMG']) && isset($_FILES['BLOCKSTORE_IMG']['tmp_name']) && !empty($_FILES['BLOCKSTORE_IMG']['tmp_name']))
 			{
@@ -135,6 +138,7 @@ class BlockStore extends Module
 					}
 				}
 			}
+			$this->_clearCache('blockstore.tpl');
 		}
 		return '';
 	}
@@ -201,7 +205,7 @@ class BlockStore extends Module
 		);
 
 		foreach ($languages as $lang)
-			$data['BLOCKSTORE_TEXT'][$lang['id_lang']] = Configuration::get('BLOCKSTORE_TEXT_'.$lang['id_lang']);
+			$data['BLOCKSTORE_TEXT'][$lang['id_lang']] = Configuration::get('BLOCKSTORE_TEXT', $lang['id_lang']);
 
 		return $data;
 	}
