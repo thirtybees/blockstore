@@ -1,0 +1,12 @@
+module_name: Block Store
+compatible_versions: 1.0.0+
+author: thirty bees
+category: front office
+tags:
+  - store
+  - store locator
+description_short: The block store module adds a store link to your site
+description: description.md
+images:
+  - image-1.png
+license: AFL
