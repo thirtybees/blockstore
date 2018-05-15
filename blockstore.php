@@ -40,7 +40,7 @@ class BlockStore extends Module
 		$this->bootstrap = true;
 		parent::__construct();	
 
-		$this->displayName = $this->l('Store locator block');
+		$this->displayName = $this->l('Block Store Locator');
 		$this->description = $this->l('Displays an image link to PrestaShop\'s store locator feature.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
 	}

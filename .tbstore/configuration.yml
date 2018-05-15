@@ -1,4 +1,4 @@
-module_name: Block Store
+module_name: Block Store Locator
 compatible_versions: 1.0.0+
 author: thirty bees
 category: front office
