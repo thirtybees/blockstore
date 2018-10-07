@@ -5,6 +5,7 @@ category: front office
 tags:
   - store
   - store locator
+  - blockstore
 description_short: The block store module adds a store link to your site
 description: description.md
 images:
