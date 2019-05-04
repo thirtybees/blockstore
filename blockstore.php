@@ -42,6 +42,7 @@ class BlockStore extends Module
 		$this->displayName = $this->l('Block Store Locator');
 		$this->description = $this->l('Displays an image link to thirty bees\' store locator feature.');
 		$this->tb_versions_compliancy = '> 1.0.0';
+		$this->tb_min_version = '1.0.0';
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6.99.99');
 	}
 
