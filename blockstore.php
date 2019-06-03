@@ -53,13 +53,12 @@ class BlockStore extends Module
 
 		// Hook the module either on the left or right column
 		$theme = new Theme(Context::getContext()->shop->id_theme);
-		if ((!$theme->default_right_column || !$this->registerHook('rightColumn'))
-			&& (!$theme->default_left_column || !$this->registerHook('leftColumn')))
-		{
-			// If there are no colums implemented by the template, throw an error and uninstall the module
-			$this->_errors[] = $this->l('This module needs to be hooked in a column, but your theme does not implement one.');
-			parent::uninstall();
-			return false;
+		if (Validate::isLoadedObject($theme)) {
+			if ($theme->default_right_column) {
+				$this->registerHook('rightColumn');
+			} elseif ($theme->default_left_column) {
+				$this->registerHook('leftColumn');
+			}
 		}
 
 		if (file_exists(dirname(__FILE__).'/store.jpg'))
